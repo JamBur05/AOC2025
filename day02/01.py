@@ -1,23 +1,30 @@
-def id_check(num):
-    # Odd length is always valid
-    if (len(num) % 2) != 0:
-        return
-    
-    # Substing will be len / 2
-    # Generate all of these in the range
+def id_check(start: int, end: int) -> int:
+
+    sum = 0
+
+    for i in range(start, end + 1):
+        
+        num = str(i)
+        length = len(num)
+
+        if length % 2 == 0:
+            half = length // 2
+            if num[0:half] == num[half:]:
+                sum += i
+
+    return sum
     
 
 id_list = []
-test = ["6464-1234567"]
+total_sum = 0
+
 with open("input.txt") as file:
     for x in file:
-        id_list.append(x.split(","))
+        id_list = x.strip().split(",")
 
-for id in test:
-    a, b = id.split("-")
-    7
-    # Check 1st id
-    id_check(a)
+for id in id_list:
+    start, end = id.split("-")
+    
+    total_sum += id_check(int(start), int(end))
 
-    # Check 2nd id
-    id_check(b)
+print(total_sum)
